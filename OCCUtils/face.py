@@ -25,7 +25,7 @@ from OCC.Core.TopExp import topexp
 from OCC.Core.TopoDS import TopoDS_Vertex, TopoDS_Face, TopoDS_Edge
 from OCC.Core.GeomLProp import GeomLProp_SLProps
 from OCC.Core.BRepTools import breptools_UVBounds
-from OCC.Core.BRepAdaptor import BRepAdaptor_Surface, BRepAdaptor_HSurface
+from OCC.Core.BRepAdaptor import BRepAdaptor_Surface
 from OCC.Core.ShapeAnalysis import ShapeAnalysis_Surface
 from OCC.Core.GeomProjLib import geomprojlib
 from OCC.Core.Adaptor3d import Adaptor3d_IsoCurve

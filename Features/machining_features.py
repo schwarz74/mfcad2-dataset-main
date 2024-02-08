@@ -65,9 +65,9 @@ class MachiningFeature:
         :param triangles:
         :return:
         """
-        if self.depth_type is "through":
+        if self.depth_type == "through":
             return self._depth_through()
-        elif self.depth_type is "blind":
+        elif self.depth_type == "blind":
             return self._depth_blind(bound, triangles)
         else:
             print(f"Depth type of {self.depth_type} does not exist.")
@@ -183,12 +183,11 @@ class MachiningFeature:
         aTriangulation = BRep_Tool().Triangulation(face, aLoc)
         aTrsf = aLoc.Transformation()
 
-        aNodes = aTriangulation.Nodes()
         aTriangles = aTriangulation.Triangles()
 
         pts = []
         for i in range(1, aTriangulation.NbNodes() + 1):
-            pt = aNodes.Value(i)
+            pt = aTriangulation.Node(i)
             pt.Transform(aTrsf)
             pts.append([pt.X(), pt.Y(), pt.Z()])
 
