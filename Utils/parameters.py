@@ -49,7 +49,9 @@ feat_names = ['chamfer', #0
               'circular_blind_step', #21
               'rectangular_blind_step', #22
               'round', #23
-              'stock'] #24
+              'stock', #24
+              'drill_pocket_140deg'#25
+              ]
 
 feat_names_planar = ['rectangular_through_slot', #0
              'triangular_through_slot', #1
@@ -67,3 +69,16 @@ feat_names_planar = ['rectangular_through_slot', #0
              '6sides_pocket', #13
              'chamfer', #14
              'stock'] #15
+
+
+# diameter : working length in mm #TODO vlt in cm umrechnen, kp was standard unit hier is
+#TODO 
+drill11620xxx = [(5,20), (7.5,29), (10,35), (12.5,43), (15,45), (20,55)]
+
+def largest_tuple_below(x,y,lst):
+    lst.sort(reverse=True)
+    for tup in lst:
+        if tup[0] < x:
+            if tup[1] < y:
+                return tup
+    return None

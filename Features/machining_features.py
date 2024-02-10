@@ -705,10 +705,10 @@ class MachiningFeature:
         shape, label_map = self._apply_feature(self.shape, self.label_map, self.feat_type, feat_face, bound_max[4] * depth)
 
         topo = TopologyExplorer(shape)
-
+        
         if topo.number_of_solids() > 1:
             return self.shape, self.label_map, bounds
-
+        
         return shape, label_map, self.bounds
 
 

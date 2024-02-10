@@ -34,13 +34,14 @@ from Features.h_circular_end_blind_slot import HCircularEndBlindSlot
 from Features.triangular_blind_step import TriangularBlindStep
 from Features.circular_blind_step import CircularBlindStep
 from Features.rectangular_blind_step import RectangularBlindStep
+from Features.custom_drill_140deg import Drill140deg
 
 feat_names = ['chamfer', 'through_hole', 'triangular_passage', 'rectangular_passage', '6sides_passage',
               'triangular_through_slot', 'rectangular_through_slot', 'circular_through_slot',
               'rectangular_through_step', '2sides_through_step', 'slanted_through_step', 'Oring', 'blind_hole',
               'triangular_pocket', 'rectangular_pocket', '6sides_pocket', 'circular_end_pocket',
               'rectangular_blind_slot', 'v_circular_end_blind_slot', 'h_circular_end_blind_slot',
-              'triangular_blind_step', 'circular_blind_step', 'rectangular_blind_step', 'round', 'stock']
+              'triangular_blind_step', 'circular_blind_step', 'rectangular_blind_step', 'round', 'stock', 'drill_pocket_140deg']
 
 feat_classes = {"chamfer": Chamfer, "through_hole": ThroughHole, "triangular_passage": TriangularPassage,
                 "rectangular_passage": RectangularPassage, "6sides_passage": SixSidesPassage,
@@ -52,7 +53,7 @@ feat_classes = {"chamfer": Chamfer, "through_hole": ThroughHole, "triangular_pas
                 "rectangular_blind_slot": RectangularBlindSlot, "v_circular_end_blind_slot": VCircularEndBlindSlot,
                 "h_circular_end_blind_slot": HCircularEndBlindSlot, "triangular_blind_step": TriangularBlindStep,
                 "circular_blind_step": CircularBlindStep, "rectangular_blind_step": RectangularBlindStep,
-                "round": Round}
+                "round": Round, "drill_pocket_140deg" : Drill140deg}
 
 through_blind_features = ["triangular_passage", "rectangular_passage", "6sides_passage", "triangular_pocket",
                           "rectangular_pocket", "6sides_pocket", "through_hole", "blind_hole", "circular_end_pocket",
@@ -110,7 +111,8 @@ def rearrange_combo(combination):
                 or val == param.feat_names.index("triangular_pocket") \
                 or val == param.feat_names.index("rectangular_pocket") \
                 or val == param.feat_names.index("6sides_pocket") \
-                or val == param.feat_names.index("circular_end_pocket"):
+                or val == param.feat_names.index("circular_end_pocket")\
+                or val == param.feat_names.index("drill_pocket_140deg"):
             blind_feats.append(val)
 
         elif val == param.feat_names.index("Oring"):
@@ -243,7 +245,7 @@ def display_bounds(bounds, display, color):
 if __name__ == '__main__':
     from OCC.Display import SimpleGui
 
-    combo = [22]
+    combo = [12,25,12,25]
 
     shape, label_map = shape_from_directive(combo)
 
