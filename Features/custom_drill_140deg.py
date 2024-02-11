@@ -18,7 +18,6 @@ class Drill140deg(MachiningFeature):
         self.bound_type = 4
         self.depth_type = "blind"
         self.feat_type = "drill_pocket_140deg"
-        self._halfang = 1.2217 #140deg/2
 
     #genau wie blind_hole
     def _add_sketch(self, bound):
