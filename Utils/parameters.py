@@ -51,7 +51,8 @@ feat_names = ['chamfer', #0
               'round', #23
               'stock', #24
               'drill_pocket_140deg',#25
-              'stepdrill_cone_90deg' #26
+              'spotdrill_cone_90deg', #26
+              'stepdrill_pocket_90deg' #27
               ]
 
 feat_names_planar = ['rectangular_through_slot', #0
@@ -71,24 +72,22 @@ feat_names_planar = ['rectangular_through_slot', #0
              'chamfer', #14
              'stock'] #15
 
-
+#certain values are precalculated to save runtime
 #lists sorted decending
-# radius : working length (in mm)
-drill11620xxx = [(10, 55), (8.75, 51), (7.5, 45), (6.25, 43), (5, 35), (3.75, 29), (2.5, 20), (2, 17), (1.5, 14), (1, 11), (0.5, 4.5)]
-# radius
-stepdrill107020xx = [10, 9, 8, 7, 6, 5, 4, 3, 2.5, 2, 1.5, 1]
-def largest_tuple_below(x,y,lst):
-    """
-
-    Args:
-        x (_type_): radius
-        y (_type_): length
-        lst (_type_): _description_
-
-    Returns:
-        _type_: diameter, length
-    """    
-    for tup in lst:
-        if tup[0] < x and tup[1] < y:
-            return tup 
-    return (0,0)
+# (radius,working length, floor(cone_height), cylinder_depth) (in mm)
+drill11620xxx = [(10, 55, 3.63, 51.37), (8.75, 51, 3.18, 47.82), (7.5, 45, 2.72, 42.28), (6.25, 43, 2.27, 40.73), (5, 35, 1.81, 33.19), (3.75, 29, 1.36, 27.64),
+                  (2.5, 20, 0.90, 19.1), (2, 17, 0.72, 16.28), (1.5, 14, 0.54, 13.46), (1, 11, 0.36, 10.64), (0.5, 4.5, 0.18, 4.32)]
+# radius (in mm)
+spotdrill107020xx = [10, 9, 8, 7, 6, 5, 4, 3, 2.5, 2, 1.5, 1]
+#(in mm)
+stepdrill10767xxxxx = [
+{'tipcone_height':5.10, 'cylinder_height':38.5, 'sink_height':2, 'height_total':46.5, 'inner_radius':14, 'outer_radius':18}, #m16
+{'tipcone_height':4.37, 'cylinder_height':34.5, 'sink_height':2, 'height_total':40.87, 'inner_radius':12, 'outer_radius':16}, #m14
+{'tipcone_height':3.71, 'cylinder_height':30,   'sink_height':1.9, 'height_total':35.61, 'inner_radius':10.2, 'outer_radius':14}, #m12
+{'tipcone_height':3.09, 'cylinder_height':25.5, 'sink_height':1.75, 'height_total':30.34, 'inner_radius':8.5, 'outer_radius':12}, #m10
+{'tipcone_height':2.48, 'cylinder_height':21,   'sink_height':1.6, 'height_total':25.08, 'inner_radius':6.8, 'outer_radius':10}, #m8
+{'tipcone_height':1.82, 'cylinder_height':16.5, 'sink_height':1.5, 'height_total':19.82, 'inner_radius':5, 'outer_radius':8}, #m6
+{'tipcone_height':1.53, 'cylinder_height':13.6, 'sink_height':0.9, 'height_total':16.03, 'inner_radius':4.2, 'outer_radius':6}, #m5
+{'tipcone_height':1.27, 'cylinder_height':11.4, 'sink_height':1.35, 'height_total':14.02, 'inner_radius':3.3, 'outer_radius':6}, #m4
+{'tipcone_height':0.91, 'cylinder_height':8.8,  'sink_height':1.75, 'height_total':11.46, 'inner_radius':2.5, 'outer_radius':6} #m3
+]

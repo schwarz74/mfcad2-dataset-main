@@ -82,7 +82,7 @@ if __name__ == '__main__':
     if not os.path.exists(shape_dir):
         os.mkdir(shape_dir)
 
-    generate_shape(shape_dir,[12,12],99)
+    generate_shape(shape_dir,[25,25,25,25,25],103)
    
 '''
     combos = []

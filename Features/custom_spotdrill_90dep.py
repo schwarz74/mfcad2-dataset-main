@@ -6,19 +6,18 @@ from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_Make
 from OCC.Core.gp import gp_Circ, gp_Ax2, gp_Pnt, gp_Dir
 from Features.machining_features import MachiningFeature
 import Utils.shape_factory as shape_factory
-from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeCone, BRepPrimAPI_MakeCylinder
-from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse, BRepAlgoAPI_Cut
+from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeCone
+from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Cut
 
-from Utils.parameters import drill11620xxx
+from Utils.parameters import spotdrill107020xx
 
-class Drill140deg(MachiningFeature):
+class Spotdrill90deg(MachiningFeature):
     def __init__(self, shape, label_map, min_len, clearance, feat_names):
         super().__init__(shape, label_map, min_len, clearance, feat_names)
         self.shifter_type = 4
         self.bound_type = 4
         self.depth_type = "blind"
-        self.feat_type = "drill_pocket_140deg"
-        self._halfang = 1.2217 #140deg/2
+        self.feat_type = "spotdrill_cone_90deg"
 
     #genau wie blind_hole
     def _add_sketch(self, bound):
@@ -46,30 +45,28 @@ class Drill140deg(MachiningFeature):
     
     def _apply_feature(self, old_shape, old_labels, feat_type, feat_face, depth_dir):
         
-        depth_norm = np.linalg.norm(depth_dir)
 
-        for tuple in drill11620xxx:
-            if tuple[0] < self.radius and tuple[1] < depth_norm:
-                self.radius = tuple[0]
-                depth_total = tuple[1]
-                cone_depth = tuple[2]
-                cylinder_depth = tuple[3]
-                break
+        depth_max = np.linalg.norm(depth_dir)
+
+        for radius in spotdrill107020xx:
+            if radius < self.radius:
+                if radius < depth_max:
+                    self.radius = radius
+                    break
+        # can't place cone
         else:
             return old_shape, old_labels
+            
 
-        # make the shapes
-        cylinder = BRepPrimAPI_MakeCylinder(gp_Ax2(gp_Pnt(self.center[0], self.center[1], self.center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), self.radius, cylinder_depth)
-        cone_center = self.center + (-self.normal*cylinder_depth)
-        cone = BRepPrimAPI_MakeCone(gp_Ax2(gp_Pnt(cone_center[0], cone_center[1], cone_center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), self.radius,0 , cone_depth)
- 
+
+
         # combine the shapes
-        fused = BRepAlgoAPI_Fuse(cone.Shape(),cylinder.Shape())
-        result = BRepAlgoAPI_Cut(old_shape, fused.Shape())
+        cone = BRepPrimAPI_MakeCone(gp_Ax2(gp_Pnt(self.center[0], self.center[1], self.center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), self.radius,0 , self.radius)
+        result = BRepAlgoAPI_Cut(old_shape, cone.Shape())
         shape = result.Shape()
         
         
-        fmap = shape_factory.map_face_before_and_after_feat(old_shape, result)
+        fmap = shape_factory.map_face_before_and_after_feat(old_shape, result) #TODO debug und schau, ob das gleiche passiert wie mit prism
         new_labels = shape_factory.map_from_shape_and_name(fmap, old_labels, shape, self.feat_names.index(feat_type))
 
         return shape, new_labels
