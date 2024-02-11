@@ -71,14 +71,21 @@ feat_names_planar = ['rectangular_through_slot', #0
              'stock'] #15
 
 
-# diameter : working length in mm #TODO vlt in cm umrechnen, kp was standard unit hier is
-#TODO 
-drill11620xxx = [(5,20), (7.5,29), (10,35), (12.5,43), (15,45), (20,55)]
+drill11620xxx = [(1,4.5), (2,11), (3,14), (4,17), (5,20), (7.5,29), (10,35), (12.5,43), (15,45), (17.5,51),(20,55)]
 
 def largest_tuple_below(x,y,lst):
+    """
+
+    Args:
+        x (_type_): diameter
+        y (_type_): length
+        lst (_type_): _description_
+
+    Returns:
+        _type_: diameter, length
+    """    
     lst.sort(reverse=True)
     for tup in lst:
-        if tup[0] < x:
-            if tup[1] < y:
-                return tup
-    return None
+        if tup[0] < x and tup[1] < y:
+            return tup 
+    return (0,0)
