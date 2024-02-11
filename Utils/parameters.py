@@ -50,7 +50,8 @@ feat_names = ['chamfer', #0
               'rectangular_blind_step', #22
               'round', #23
               'stock', #24
-              'drill_pocket_140deg'#25
+              'drill_pocket_140deg',#25
+              'stepdrill_cone_90deg' #26
               ]
 
 feat_names_planar = ['rectangular_through_slot', #0
@@ -71,20 +72,22 @@ feat_names_planar = ['rectangular_through_slot', #0
              'stock'] #15
 
 
-drill11620xxx = [(1,4.5), (2,11), (3,14), (4,17), (5,20), (7.5,29), (10,35), (12.5,43), (15,45), (17.5,51),(20,55)]
-
+#lists sorted decending
+# radius : working length (in mm)
+drill11620xxx = [(10, 55), (8.75, 51), (7.5, 45), (6.25, 43), (5, 35), (3.75, 29), (2.5, 20), (2, 17), (1.5, 14), (1, 11), (0.5, 4.5)]
+# radius
+stepdrill107020xx = [10, 9, 8, 7, 6, 5, 4, 3, 2.5, 2, 1.5, 1]
 def largest_tuple_below(x,y,lst):
     """
 
     Args:
-        x (_type_): diameter
+        x (_type_): radius
         y (_type_): length
         lst (_type_): _description_
 
     Returns:
         _type_: diameter, length
     """    
-    lst.sort(reverse=True)
     for tup in lst:
         if tup[0] < x and tup[1] < y:
             return tup 

@@ -18,7 +18,7 @@ class Drill140deg(MachiningFeature):
         self.bound_type = 4
         self.depth_type = "blind"
         self.feat_type = "drill_pocket_140deg"
-        self._halfang = 1.2217
+        self._halfang = 1.2217 #140deg/2
 
     #genau wie blind_hole
     def _add_sketch(self, bound):
@@ -48,8 +48,7 @@ class Drill140deg(MachiningFeature):
         
         #TODO make calculations more efficient
         depth_norm = np.linalg.norm(depth_dir)
-        self.radius, depth_total = largest_tuple_below(self.radius*2, depth_norm,drill11620xxx)
-        self.radius /=2 # because function returns diameter
+        self.radius, depth_total = largest_tuple_below(self.radius, depth_norm,drill11620xxx)
 
         if self.radius <= 0:
             return old_shape, old_labels
