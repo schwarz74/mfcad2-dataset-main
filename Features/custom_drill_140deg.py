@@ -3,15 +3,11 @@ import numpy as np
 import Utils.occ_utils as occ_utils
 
 from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire, BRepBuilderAPI_MakeFace
-from OCC.Core.gp import gp_Circ, gp_Ax2, gp_Ax3, gp_Pnt, gp_Dir, gp_Cone, gp_Cylinder
+from OCC.Core.gp import gp_Circ, gp_Ax2, gp_Pnt, gp_Dir
 from Features.machining_features import MachiningFeature
-
-from OCC.Core.BRepFeat import BRepFeat_MakePrism
 import Utils.shape_factory as shape_factory
-from OCC.Core.TopoDS import TopoDS_Face
-
 from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeCone, BRepPrimAPI_MakeCylinder
-from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse, BRepAlgoAPI_Cut, BRepAlgoAPI_Section
+from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse, BRepAlgoAPI_Cut
 
 from Utils.parameters import largest_tuple_below, drill11620xxx
 
@@ -24,8 +20,6 @@ class Drill140deg(MachiningFeature):
         self.feat_type = "drill_pocket_140deg"
         self._halfang = 1.2217
 
-        # approx LU = 0.36*dia
-    
     #genau wie blind_hole
     def _add_sketch(self, bound):
         dir_w = bound[2] - bound[1]
