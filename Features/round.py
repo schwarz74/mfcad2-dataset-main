@@ -55,7 +55,10 @@ class Round(MachiningFeature):
                 self.edges.remove(edge)
                 break
 
-            except:
+            except Exception as e:
+                # framework bug in used version!
+                if 'StdFail_NotDoneBRep_API' in e.args[0]:
+                    return self.shape, self.label_map, self.edges
                 self.edges.remove(edge)
                 continue
 
