@@ -75,16 +75,14 @@ def generate_shape(shape_dir, combination, count):
 if __name__ == '__main__':
     # Parameters to be set before use
     shape_dir = 'data'
-    num_features = 24
+    num_features = 27
     combo_range = [3, 10]
-    num_samples = 10
+    num_samples = 100
 
     if not os.path.exists(shape_dir):
         os.mkdir(shape_dir)
 
-    generate_shape(shape_dir,[25,25,25,25,25],103)
-   
-'''
+
     combos = []
     for num_combo in range(combo_range[0], combo_range[1]):
         combos += list(combinations_with_replacement(range(num_features), num_combo))
@@ -95,5 +93,5 @@ if __name__ == '__main__':
     for count, combo in enumerate(test_combos):
         print(f"{count}: {combo}")
         generate_shape(shape_dir, combo, count)
-'''
+
 

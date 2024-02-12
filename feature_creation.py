@@ -113,6 +113,11 @@ def rearrange_combo(combination):
                 or val == param.feat_names.index("6sides_passage"):
             through_feats.append(val)
 
+        elif val == param.feat_names.index("drill_pocket_140deg") \
+                or val == param.feat_names.index("spotdrill_cone_90deg") \
+                or val == param.feat_names.index("stepdrill_pocket_90deg"):
+            custom_feats.append(val)
+
         elif val == param.feat_names.index("blind_hole") \
                 or val == param.feat_names.index("triangular_pocket") \
                 or val == param.feat_names.index("rectangular_pocket") \
@@ -123,11 +128,6 @@ def rearrange_combo(combination):
         elif val == param.feat_names.index("Oring"):
             o_ring_feats.append(val)
         
-        elif val == param.feat_names.index("drill_pocket_140deg") \
-                or val == param.feat_names.index("spotdrill_cone_90deg") \
-                or val == param.feat_names.index("stepdrill_pocket_90deg"):
-            custom_feats.append(val)
-
     new_combination = step_feats + slot_feats + through_feats + blind_feats + o_ring_feats + custom_feats + transition_feats
 
     return new_combination
@@ -255,7 +255,7 @@ def display_bounds(bounds, display, color):
 if __name__ == '__main__':
     from OCC.Display import SimpleGui
 
-    combo = [27,27,27,27,27]
+    combo = [12,12,12,12]
 
     shape, label_map = shape_from_directive(combo)
 
