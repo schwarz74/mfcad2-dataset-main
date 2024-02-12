@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import Utils.occ_utils as occ_utils
+import random
 
 from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire, BRepBuilderAPI_MakeFace
 from OCC.Core.gp import gp_Circ, gp_Ax2, gp_Pnt, gp_Dir
@@ -48,11 +49,11 @@ class Spotdrill90deg(MachiningFeature):
 
         depth_max = np.linalg.norm(depth_dir)
 
-        for radius in spotdrill107020xx:
-            if radius < self.radius:
-                if radius < depth_max:
-                    self.radius = radius
-                    break
+        for i, val in enumerate(spotdrill107020xx):
+            if val < self.radius and val < depth_max:
+                # take random size that is smaller than self.radius
+                self.radius = random.choice(spotdrill107020xx[i:])
+                break
         # can't place cone
         else:
             return old_shape, old_labels

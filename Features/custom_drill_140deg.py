@@ -47,12 +47,12 @@ class Drill140deg(MachiningFeature):
         
         depth_norm = np.linalg.norm(depth_dir)
 
-        for tuple in drill11620xxx:
-            if tuple[0] < self.radius and tuple[1] < depth_norm:
-                self.radius = tuple[0]
-                depth_total = tuple[1]
-                cone_depth = tuple[2]
-                cylinder_depth = tuple[3]
+        for drill in drill11620xxx:
+            if drill['radius'] < self.radius and drill['total_height'] < depth_norm:
+                self.radius = drill['radius']
+                depth_total = drill['total_height']
+                cone_depth = drill['cone_height']
+                cylinder_depth = drill['cylinder_height']
                 break
         else:
             return old_shape, old_labels
