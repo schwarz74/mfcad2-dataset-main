@@ -49,10 +49,10 @@ feat_names = ['chamfer', #0
               'circular_blind_step', #21
               'rectangular_blind_step', #22
               'round', #23
-              'stock', #24
-              'drill_pocket_140deg',#25
-              'spotdrill_cone_90deg', #26
-              'stepdrill_pocket_90deg' #27
+              'drill_pocket_140deg',#24
+              'spotdrill_cone_90deg', #25
+              'stepdrill_pocket_90deg', #26
+              'stock' #27
               ]
 
 feat_names_planar = ['rectangular_through_slot', #0
