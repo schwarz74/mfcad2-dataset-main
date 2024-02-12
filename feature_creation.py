@@ -128,7 +128,7 @@ def rearrange_combo(combination):
         elif val == param.feat_names.index("Oring"):
             o_ring_feats.append(val)
         
-    new_combination = step_feats + slot_feats + through_feats + blind_feats + o_ring_feats + custom_feats + transition_feats
+    new_combination = step_feats + slot_feats + through_feats + blind_feats + o_ring_feats + transition_feats + custom_feats
 
     return new_combination
 
