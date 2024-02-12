@@ -141,7 +141,7 @@ def rearrange_combo_planar(combination):
     blind_feats = []
 
     for cnt, val in enumerate(combination):
-        if val == param.feat_names.index("chamfer"):
+        if val == param.feat_names.index("chamfer") or val == param.feat_names.index("round"):
             transition_feats.append(val)
         elif val == param.feat_names.index("rectangular_through_step") \
                 or val == param.feat_names.index("2sides_through_step") \
