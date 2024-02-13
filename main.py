@@ -77,7 +77,7 @@ if __name__ == '__main__':
     shape_dir = 'data'
     num_features = 27
     combo_range = [3, 10]
-    num_samples = 100
+    num_samples = 1000
 
     if not os.path.exists(shape_dir):
         os.mkdir(shape_dir)
