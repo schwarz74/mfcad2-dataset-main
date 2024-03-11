@@ -65,19 +65,11 @@ class Stepdrill90deg(MachiningFeature):
         cylinder = BRepPrimAPI_MakeCylinder(gp_Ax2(gp_Pnt(cylinder_center[0], cylinder_center[1], cylinder_center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), inner_radius, cylinder_height)
         tip_cone_center = self.center + (-self.normal*(cylinder_height+sink_height))
         tip_cone = BRepPrimAPI_MakeCone(gp_Ax2(gp_Pnt(tip_cone_center[0], tip_cone_center[1], tip_cone_center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), inner_radius,0 , tipcone_height)
-        '''
-        cylinder = BRepPrimAPI_MakeCylinder(gp_Ax2(gp_Pnt(self.center[0], self.center[1], self.center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), inner_radius, cylinder_height)
-        tip_cone_center = self.center + (-self.normal*cylinder_height)
-        tip_cone = BRepPrimAPI_MakeCone(gp_Ax2(gp_Pnt(tip_cone_center[0], tip_cone_center[1], tip_cone_center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), inner_radius,0 , tipcone_height)
-        outer_cone_center = self.center + (self.normal*sink_height)
-        outer_cone = BRepPrimAPI_MakeCone(gp_Ax2(gp_Pnt(outer_cone_center[0], outer_cone_center[1], outer_cone_center[2]), occ_utils.as_occ(-self.normal, gp_Dir)), self.radius,inner_radius , sink_height)
-        '''
         # combine the shapes
         fused = BRepAlgoAPI_Fuse(outer_cone.Shape(), cylinder.Shape())
         fused = BRepAlgoAPI_Fuse(fused.Shape(), tip_cone.Shape())
 
         result = BRepAlgoAPI_Cut(old_shape, fused.Shape())
-        #result = BRepAlgoAPI_Fuse(fused.Shape(), old_shape)
         shape = result.Shape()
         
         
